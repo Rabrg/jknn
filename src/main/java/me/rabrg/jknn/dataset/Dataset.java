@@ -8,7 +8,11 @@ public abstract class Dataset {
 
     private final List<Entry> entries = new ArrayList<>();
 
-    public abstract int load(final String name) throws IOException, URISyntaxException;
+    public void load(final String name) throws IOException, URISyntaxException {
+        if (entries.size() > 0)
+            throw new IllegalStateException("Tried to load " + name + " with "+ entries.size()
+                    + " entries already loaded!");
+    }
 
     protected void addEntry(final double[] features, final String label) {
         final Entry entry = new Entry(features, label);

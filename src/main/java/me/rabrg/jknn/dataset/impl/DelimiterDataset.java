@@ -19,7 +19,9 @@ public class DelimiterDataset extends Dataset {
     }
 
     @Override
-    public int load(final String name) throws IOException, URISyntaxException {
+    public void load(final String name) throws IOException, URISyntaxException {
+        super.load(name);
+
         final URI uri = getClass().getResource(name).toURI();
         final Path path = Paths.get(uri);
         final List<String> lines = Files.readAllLines(path);
@@ -34,6 +36,5 @@ public class DelimiterDataset extends Dataset {
 
             addEntry(features, label);
         }
-        return getEntries().size();
     }
 }
