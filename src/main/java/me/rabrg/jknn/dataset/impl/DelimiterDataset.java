@@ -30,7 +30,7 @@ public class DelimiterDataset extends Dataset {
             for (int i = 0; i < features.length; i++)
                 features[i] = Double.parseDouble(split[i]);
 
-            final int label = Integer.parseInt(split[features.length]);
+            final String label = split[features.length];
 
             addEntry(features, label);
         }

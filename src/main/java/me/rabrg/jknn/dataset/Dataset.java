@@ -2,9 +2,7 @@ package me.rabrg.jknn.dataset;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public abstract class Dataset {
 
@@ -12,7 +10,7 @@ public abstract class Dataset {
 
     public abstract int load(final String name) throws IOException, URISyntaxException;
 
-    protected void addEntry(final double[] features, final int label) {
+    protected void addEntry(final double[] features, final String label) {
         final Entry entry = new Entry(features, label);
         entries.add(entry);
     }
@@ -24,9 +22,9 @@ public abstract class Dataset {
     public static final class Entry {
 
         private final double[] features;
-        private final int label;
+        private final String label;
 
-        private Entry(final double[] features, final int label) {
+        private Entry(final double[] features, final String label) {
             this.features = features;
             this.label = label;
         }
@@ -35,7 +33,7 @@ public abstract class Dataset {
             return features;
         }
 
-        public int getLabel() {
+        public String getLabel() {
             return label;
         }
     }
