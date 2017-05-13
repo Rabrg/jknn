@@ -1,32 +1,19 @@
 package me.rabrg.jknn.classifier.impl;
 
 import me.rabrg.jknn.classifier.Classifier;
+import me.rabrg.jknn.dataset.Dataset;
 
 import java.util.*;
 
 public final class BruteForceClassifier extends Classifier {
 
-    private double[][] trainingFeatures;
-    private String[] trainingLabels;
+    private final List<double[]> trainingFeatures = new ArrayList<>();
+    private final List<String> trainingLabels = new ArrayList<>();
 
     @Override
-    public void fit(final double[][] features, final String[] labels) {
-        trainingFeatures = concatFeatures(trainingFeatures == null ? new double[0][] : trainingFeatures, features);
-        trainingLabels = concatLabels(trainingLabels == null ? new String[0] : trainingLabels, labels);
-    }
-
-    private static double[][] concatFeatures(final double[][] a, final double[][] b) {
-        final double[][] result = new double[a.length + b.length][];
-        System.arraycopy(a, 0, result, 0, a.length);
-        System.arraycopy(b, 0, result, a.length, b.length);
-        return result;
-    }
-
-    private static String[] concatLabels(final String[] a, final String[] b) {
-        final String[] result = new String[a.length + b.length];
-        System.arraycopy(a, 0, result, 0, a.length);
-        System.arraycopy(b, 0, result, a.length, b.length);
-        return result;
+    public void fit(final double[] features, final String label) {
+        trainingFeatures.add(features);
+        trainingLabels.add(label);
     }
 
     @Override
@@ -38,10 +25,10 @@ public final class BruteForceClassifier extends Classifier {
 
     private Map<Double, List<String>> distanceLabelMap(final double[] features) {
         final Map<Double, List<String>> map = new TreeMap<>();
-        for (int i = 0; i < trainingLabels.length; i++) {
-            final double distance = getDistance().getDistance(features, trainingFeatures[i]);
+        for (int i = 0; i < trainingLabels.size(); i++) {
+            final double distance = getDistance().getDistance(features, trainingFeatures.get(i));
             final List<String> labels = map.getOrDefault(distance, new ArrayList<>());
-            labels.add(trainingLabels[i]);
+            labels.add(trainingLabels.get(i));
             map.put(distance, labels);
         }
         return map;

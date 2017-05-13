@@ -1,7 +1,11 @@
 package me.rabrg.jknn.classifier;
 
+import me.rabrg.jknn.dataset.Dataset;
 import me.rabrg.jknn.distance.Distance;
 import me.rabrg.jknn.distance.impl.EuclideanDistance;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Classifier {
 
@@ -15,7 +19,20 @@ public abstract class Classifier {
         this.distance = distance;
     }
 
-    public abstract void fit(double[][] features, String[] labels);
+    public final void fit(final Dataset dataset) {
+        for (int i = 0; i < dataset.getFeaturesList().size(); i++)
+            fit(dataset.getFeaturesList().get(i), dataset.getLabelsList().get(i));
+    }
+
+    public abstract void fit(final double[] features, final String label);
+
+    public final double accuracy(final Dataset dataset, final int k) {
+        double correct = 0;
+        for (int i = 0; i < dataset.getFeaturesList().size(); i++)
+            if (classify(dataset.getFeaturesList().get(i), k).equals(dataset.getLabelsList().get(i)))
+                correct++;
+        return correct / dataset.getFeaturesList().size();
+    }
 
     public abstract String classify(double[] features, int k);
 
