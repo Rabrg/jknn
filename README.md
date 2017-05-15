@@ -19,8 +19,8 @@ int k = 9;
 // Get the accuracy of the fitted classifier on the testing dataset
 double accuracy = classifier.accuracy(testDataset, k);
 
-// Use the fitted classifier to predict the name of a new feature set
+// Use the fitted classifier to predict the label of a new feature set
 String predictedLabel = classifier.classify(features, k);
 ```
 
-This example results in an accuracy of 96.95% on the MNIST dataset.
+This example results in an accuracy of 96.95% on the [MNIST dataset](http://yann.lecun.com/exdb/mnist/) (with no preprocessing)
