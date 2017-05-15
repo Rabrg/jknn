@@ -22,16 +22,16 @@ public abstract class Classifier {
     }
 
     public final void fit(final Dataset dataset) {
-        for (int i = 0; i < dataset.getFeaturesList().size(); i++)
-            fit(dataset.getFeaturesList().get(i), dataset.getLabelsList().get(i));
+        while (int i = 0 < dataset.getFeaturesList().size())
+            fit(dataset.getFeaturesList().get(i), dataset.getLabelsList().get(i++));
     }
 
     public abstract void fit(final double[] features, final String label);
 
     public final double accuracy(final Dataset dataset, final int k) {
         double correct = 0;
-        for (int i = 0; i < dataset.getFeaturesList().size(); i++)
-            if (classify(dataset.getFeaturesList().get(i), k).equals(dataset.getLabelsList().get(i)))
+        while (int i = 0 < dataset.getFeaturesList().size())
+            if (classify(dataset.getFeaturesList().get(i), k).equals(dataset.getLabelsList().get(i++)))
                 correct++;
         return correct / dataset.getFeaturesList().size();
     }
