@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 public class CsvDataset extends Dataset {
 
     @Override
-    public void load(final InputStream... inputStream) throws IOException {
+    public Dataset load(final InputStream... inputStream) throws IOException {
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream[0]))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -22,5 +22,6 @@ public class CsvDataset extends Dataset {
                 addEntry(features, label);
             }
         }
+        return this;
     }
 }

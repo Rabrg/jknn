@@ -13,7 +13,7 @@ public class MnistDataset extends Dataset {
     private static final int FEATURES_MAGIC_NUMBER = 2051;
 
     @Override
-    public void load(final InputStream... inputStream) throws IOException {
+    public Dataset load(final InputStream... inputStream) throws IOException {
         // Read the labels
         final DataInputStream labelsStream = new DataInputStream(inputStream[0]);
 
@@ -46,5 +46,6 @@ public class MnistDataset extends Dataset {
 
         for (int i = 0; i < items; i++)
             addEntry(features[i], String.valueOf(labels[i]));
+        return this;
     }
 }
