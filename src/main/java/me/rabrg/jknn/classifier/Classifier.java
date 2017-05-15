@@ -5,7 +5,9 @@ import me.rabrg.jknn.distance.Distance;
 import me.rabrg.jknn.distance.impl.EuclideanDistance;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Classifier {
 
@@ -40,8 +42,18 @@ public abstract class Classifier {
         return distance;
     }
 
-    // TODO: classifier builder class
-    class Builder {
-
+    protected <T> T mode(final List<T> list) {
+        final Map<T, Integer> map = new HashMap<>();
+        int maxFreq = 0;
+        T maxFreqLabel = null;
+        for (final T s : list) {
+            final int freq = map.getOrDefault(s, 0) + 1;
+            if (freq > maxFreq) {
+                maxFreq = freq;
+                maxFreqLabel = s;
+            }
+            map.put(s, freq);
+        }
+        return maxFreqLabel;
     }
 }

@@ -41,19 +41,4 @@ public final class BruteForceClassifier extends Classifier {
                 break;
         return list;
     }
-
-    private static String mode(final List<String> list) {
-        final Map<String, Integer> map = new HashMap<>();
-        int maxFreq = 0;
-        String maxFreqLabel = null;
-        for (final String s : list) {
-            final int freq = map.getOrDefault(s, 0) + 1;
-            if (freq > maxFreq) {
-                maxFreq = freq;
-                maxFreqLabel = s;
-            }
-            map.put(s, freq);
-        }
-        return maxFreqLabel;
-    }
 }
